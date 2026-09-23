@@ -280,9 +280,22 @@ function resolveBinds(input: Rec): Rec {
   return out;
 }
 
+function nextSeq(entitySet: string): number {
+  const records = ensureSet(entitySet);
+  return records.length + 1;
+}
+
 export function addRecord(entitySet: string, record: Rec): void {
-  // Resolve any @odata.bind keys so filters on _x_value fields match immediately.
-  ensureSet(entitySet).push(resolveBinds(record));
+  const resolved = resolveBinds(record);
+  // Auto-generate autonumber fields if the record doesn't already have them.
+  if (entitySet === 'pmo_projectrequests' && !resolved.pmo_autonumber) {
+    const year = new Date().getFullYear();
+    resolved.pmo_autonumber = `REQ-${year}-${String(nextSeq(entitySet)).padStart(4, '0')}`;
+  }
+  if ((entitySet === 'msdyn_projects' || entitySet === 'pmo_projects') && !resolved.pmo_projectnumber) {
+    resolved.pmo_projectnumber = `PROJ-${String(nextSeq(entitySet)).padStart(5, '0')}`;
+  }
+  ensureSet(entitySet).push(resolved);
 }
 
 export function updateRecord(entitySet: string, id: string, patch: Rec): void {
@@ -350,14 +363,51 @@ export function handlePssDelete(body: Rec): Rec {
   return pssResult(body);
 }
 
-// ─── Approval → auto-create project (both PSS + custom sources) ──────────────
+// ─── Approval → auto-create project or program (both PSS + custom sources) ───
 const APPROVED_STATUS = 893460023;
+const CONVERSION_TARGET_PROGRAM = 893460221;
+
+export function maybeCreateDemoProgram(entitySet: string, id: string, patch: Rec): void {
+  if (entitySet !== 'pmo_projectrequests') return;
+  if (patch.pmo_status !== APPROVED_STATUS) return;
+  const request = getRecord<Rec>('pmo_projectrequests', id);
+  if (!request) return;
+  if (request.pmo_conversiontarget !== CONVERSION_TARGET_PROGRAM) return;
+
+  const programId = generateId();
+  const now = new Date().toISOString();
+  addRecord('msdyn_projectprograms', {
+    msdyn_projectprogramid: programId,
+    msdyn_name: String(request.pmo_name ?? 'Demo Program'),
+    msdyn_description: request.pmo_description ?? '',
+    statecode: 0,
+    createdon: now,
+    modifiedon: now,
+  });
+  addRecord('pmo_programs', {
+    pmo_programid: programId,
+    pmo_name: String(request.pmo_name ?? 'Demo Program'),
+    pmo_description: request.pmo_description ?? '',
+    statecode: 0,
+    createdon: now,
+    modifiedon: now,
+  });
+  updateRecord('pmo_projectrequests', id, {
+    '_pmo_convertedprogram_value': programId,
+    [`_pmo_convertedprogram_value${FV_SUFFIX}`]: String(request.pmo_name ?? 'Demo Program'),
+    pmo_converteddate: now,
+    pmo_status: APPROVED_STATUS,
+    [`pmo_status${FV_SUFFIX}`]: 'Approved',
+  });
+}
 
 export function maybeCreateDemoProject(entitySet: string, id: string, patch: Rec): void {
   if (entitySet !== 'pmo_projectrequests') return;
   if (patch.pmo_status !== APPROVED_STATUS) return;
   const request = getRecord<Rec>('pmo_projectrequests', id);
   if (!request) return;
+  // Program-type requests are handled by maybeCreateDemoProgram.
+  if (request.pmo_conversiontarget === CONVERSION_TARGET_PROGRAM) return;
 
   const projectId = generateId();
   const now = new Date().toISOString();

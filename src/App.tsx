@@ -1,5 +1,6 @@
 import { lazy, Suspense, useState, useEffect, type ReactNode } from 'react';
 import { UAT_ROUTES } from './features/uat/routes';
+import { isDemoActive } from './lib/demoMode';
 import { HashRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider, MutationCache } from '@tanstack/react-query';
 import { toast } from './hooks/useToast';
@@ -299,7 +300,7 @@ function App() {
                         Sidebar.tsx's nav entries -- features/uat/routes.tsx -- so a
                         route cannot drift from its nav item. Adding a UAT route means
                         editing that list, not this file. */}
-                    {UAT_ROUTES.map((r) => (
+                    {!isDemoActive() && UAT_ROUTES.map((r) => (
                       <Route key={r.path} path={r.path} element={r.element} />
                     ))}
                     {/* Team feature packs — routes contributed dynamically. Each is wrapped

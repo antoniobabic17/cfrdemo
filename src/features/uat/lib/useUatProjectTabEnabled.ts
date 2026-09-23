@@ -21,6 +21,7 @@
  * positively-known disable.
  */
 import { useEffectiveFeatureToggles } from '../../../hooks/useEffectiveFeatureToggles';
+import { isDemoActive } from '../../../lib/demoMode';
 import { useUatProjectSetting } from '../../../hooks/useUatDefects';
 import {
   UAT_TOGGLE_KEYS,
@@ -40,6 +41,7 @@ export interface UatProjectTabState {
 }
 
 export function useUatProjectTabEnabled(projectId: string | undefined): UatProjectTabState {
+  if (isDemoActive()) return { enabled: false, reason: 'disabled-organisation-or-team', isResolving: false };
   const toggles = useEffectiveFeatureToggles();
   const orgAndTeamEnabled = isUatCapabilityEnabled(toggles, UAT_TOGGLE_KEYS.projectTab);
   const { data: settings, isPending } = useUatProjectSetting(projectId);

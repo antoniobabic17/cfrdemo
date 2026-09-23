@@ -509,75 +509,129 @@ export const DEMO_TEAMS = [
 ];
 
 // ─── Intake Workflow Templates (pmo_gatesettemplates) ─────────────────────────
+// Named to match WORKFLOW_TOGGLE_BY_NAME in GovernedIntakeWizard so the tile
+// chooser shows both Program and Project cards with their correct toggle keys.
 export const DEMO_GATE_SET_TEMPLATES: GateSetTemplate[] = [
   {
     pmo_gatesettemplateid: WORKFLOW_A,
-    pmo_name: 'Standard Intake Workflow',
-    pmo_description: 'Three-stage intake review process for standard project requests.',
+    pmo_name: 'Standard Program Intake (5-Stage)',
+    pmo_description: 'Four-stage intake review process for program requests.',
     pmo_workflowscope: 893460200, // IntakeWorkflow
-    pmo_isdefault: true,
+    pmo_targetentitytype: 893460211, // Program
+    pmo_isdefault: false,
     statecode: 0,
   },
   {
     pmo_gatesettemplateid: WORKFLOW_B,
-    pmo_name: 'Expedited Intake Workflow',
-    pmo_description: 'Two-stage fast-track intake review for time-sensitive or low-complexity requests.',
+    pmo_name: 'Standard Project Intake (5-Stage)',
+    pmo_description: 'Six-stage intake review process for project requests.',
     pmo_workflowscope: 893460200, // IntakeWorkflow
-    pmo_isdefault: false,
+    pmo_targetentitytype: 893460210, // Project
+    pmo_isdefault: true,
     statecode: 0,
   },
 ];
 
 // ─── Intake Workflow Stages (pmo_gatesetitems) ────────────────────────────────
 export const DEMO_GATE_SET_ITEMS: GateSetItem[] = [
-  // Standard Intake Workflow — 3 stages
+  // Standard Program Intake — 4 stages
   {
     pmo_gatesetitemid: 'b2b4b29f-52aa-4fdb-8297-0d0565b0eb06',
-    pmo_name: 'Stage 1 — Initial Review',
-    pmo_gatetype: 893460090, // Initiation
+    pmo_name: 'Stage 1 — Program Identity',
+    pmo_gatetype: 893460090,
     pmo_gateorder: 1,
-    pmo_stagelabel: 'Initial Review',
+    pmo_stagelabel: 'Program Identity',
     pmo_requiresapproval: false,
     '_pmo_gateset_value': WORKFLOW_A,
     statecode: 0,
   },
   {
     pmo_gatesetitemid: '64c32929-cbf1-483c-8560-3c2c7eb055e9',
-    pmo_name: 'Stage 2 — Business Approval',
-    pmo_gatetype: 893460091, // Planning
+    pmo_name: 'Stage 2 — Strategic Fit',
+    pmo_gatetype: 893460091,
     pmo_gateorder: 2,
-    pmo_stagelabel: 'Business Approval',
-    pmo_requiresapproval: true,
+    pmo_stagelabel: 'Strategic Fit',
+    pmo_requiresapproval: false,
     '_pmo_gateset_value': WORKFLOW_A,
     statecode: 0,
   },
   {
     pmo_gatesetitemid: 'c530e231-1ffa-46bb-8b9a-0f9325fe3b5e',
-    pmo_name: 'Stage 3 — Technical Sign-off',
-    pmo_gatetype: 893460092, // Execution
+    pmo_name: 'Stage 3 — Governance Structure',
+    pmo_gatetype: 893460092,
     pmo_gateorder: 3,
-    pmo_stagelabel: 'Technical Sign-off',
+    pmo_stagelabel: 'Governance Structure',
+    pmo_requiresapproval: false,
+    '_pmo_gateset_value': WORKFLOW_A,
+    statecode: 0,
+  },
+  {
+    pmo_gatesetitemid: 'a4d7e812-3c19-4f5a-b6d0-1e8294c07f21',
+    pmo_name: 'Stage 4 — Funding & Timeline',
+    pmo_gatetype: 893460093,
+    pmo_gateorder: 4,
+    pmo_stagelabel: 'Funding & Timeline',
     pmo_requiresapproval: true,
     '_pmo_gateset_value': WORKFLOW_A,
     statecode: 0,
   },
-  // Expedited Intake Workflow — 2 stages
+  // Standard Project Intake — 6 stages
   {
     pmo_gatesetitemid: '6463599a-f8a9-459e-8a3b-6765fb337f33',
-    pmo_name: 'Stage 1 — Rapid Assessment',
-    pmo_gatetype: 893460090, // Initiation
+    pmo_name: 'Stage 1 — Request Basics',
+    pmo_gatetype: 893460090,
     pmo_gateorder: 1,
-    pmo_stagelabel: 'Rapid Assessment',
+    pmo_stagelabel: 'Request Basics',
     pmo_requiresapproval: false,
     '_pmo_gateset_value': WORKFLOW_B,
     statecode: 0,
   },
   {
     pmo_gatesetitemid: 'f1aa3da4-a487-4d01-852c-9e6ad9ba7eaa',
-    pmo_name: 'Stage 2 — Final Approval',
-    pmo_gatetype: 893460091, // Planning
+    pmo_name: 'Stage 2 — Scope & Context',
+    pmo_gatetype: 893460091,
     pmo_gateorder: 2,
-    pmo_stagelabel: 'Final Approval',
+    pmo_stagelabel: 'Scope & Context',
+    pmo_requiresapproval: false,
+    '_pmo_gateset_value': WORKFLOW_B,
+    statecode: 0,
+  },
+  {
+    pmo_gatesetitemid: 'e3c91f05-7b42-4a8e-9d16-2f3085a14c67',
+    pmo_name: 'Stage 3 — Business Justification',
+    pmo_gatetype: 893460092,
+    pmo_gateorder: 3,
+    pmo_stagelabel: 'Business Justification',
+    pmo_requiresapproval: false,
+    '_pmo_gateset_value': WORKFLOW_B,
+    statecode: 0,
+  },
+  {
+    pmo_gatesetitemid: 'd8b20e34-5f61-4c97-8a03-7e4196b25d89',
+    pmo_name: 'Stage 4 — Timeline & Budget',
+    pmo_gatetype: 893460093,
+    pmo_gateorder: 4,
+    pmo_stagelabel: 'Timeline & Budget',
+    pmo_requiresapproval: false,
+    '_pmo_gateset_value': WORKFLOW_B,
+    statecode: 0,
+  },
+  {
+    pmo_gatesetitemid: 'c17a3d92-8e50-4b86-a715-9f3207d4e1b3',
+    pmo_name: 'Stage 5 — Project Setup',
+    pmo_gatetype: 893460094,
+    pmo_gateorder: 5,
+    pmo_stagelabel: 'Project Setup',
+    pmo_requiresapproval: false,
+    '_pmo_gateset_value': WORKFLOW_B,
+    statecode: 0,
+  },
+  {
+    pmo_gatesetitemid: 'b06f4e81-2d73-4595-c824-ae5318c63f90',
+    pmo_name: 'Stage 6 — Review & Submit',
+    pmo_gatetype: 893460095,
+    pmo_gateorder: 6,
+    pmo_stagelabel: 'Review & Submit',
     pmo_requiresapproval: true,
     '_pmo_gateset_value': WORKFLOW_B,
     statecode: 0,
@@ -877,6 +931,7 @@ export const DEMO_TELEMETRY_EVENTS = [
 export const DEMO_APP_SETTINGS = [
   { pmo_appsettingid: 'ba9818b8-8770-4978-83af-251e07191da0', pmo_key: 'pmo.data_source', pmo_value: 'custom', statecode: 0 },
   { pmo_appsettingid: '19ff76bf-2a1a-4ce9-8940-752e46060938', pmo_key: 'pmo.file_source', pmo_value: 'sharepoint', statecode: 0 },
+  { pmo_appsettingid: 'c3e8a12f-5d49-4b7e-9f01-6a2384d05c71', pmo_key: 'pmo.feature_toggles_json', pmo_value: JSON.stringify({ 'intake.bypassApproval': true }), statecode: 0 },
 ];
 
 // ─── Registry: entity set name → fixture array ────────────────────────────────

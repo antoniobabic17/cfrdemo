@@ -49,6 +49,7 @@ import { isNavItemAllowed } from '../../lib/teamTabVisibility';
 import { Tooltip, TooltipTrigger, TooltipContent } from '../ui/tooltip';
 import { useActionableCount } from '../../hooks/useActionItems';
 import { useNewFeedbackCount } from '../../hooks/useUserFeedback';
+import { isDemoActive } from '../../lib/demoMode';
 
 interface NavItem {
   path: string;
@@ -213,7 +214,7 @@ export function Sidebar() {
           // Systems Improvement membership / acting-as-SI. With nav.uat off, or when the
           // viewer is neither an SI member nor an admin acting-as-SI, no UAT item appears
           // (the empty section is then filtered out below).
-          items: s.id === 'uat' && (featureToggles[UAT_TOGGLE_KEYS.nav] === false || !systemsImprovementActive)
+          items: s.id === 'uat' && (isDemoActive() || featureToggles[UAT_TOGGLE_KEYS.nav] === false || !systemsImprovementActive)
             ? []
             : s.items.filter((item) =>
                 (!item.toggleKey || featureToggles[item.toggleKey] !== false) &&

@@ -21,7 +21,7 @@ import {
   queryRecords, getRecord, addRecord, updateRecord, removeRecord,
   generateId, getPrimaryKey,
   handlePssCreate, handlePssUpdate, handlePssDelete,
-  maybeCreateDemoProject,
+  maybeCreateDemoProject, maybeCreateDemoProgram,
 } from './demoStore';
 import { isSharePointDataActive } from './sharePointData';
 import {
@@ -420,6 +420,7 @@ export async function update(entitySetName: string, id: string, payload: object)
   if (isSharePointDataActive(entitySetName)) return spUpdate(entitySetName, id, payload);
   if (isDemoModeActive()) {
     maybeCreateDemoProject(entitySetName, id, payload as Record<string, unknown>);
+    maybeCreateDemoProgram(entitySetName, id, payload as Record<string, unknown>);
     updateRecord(entitySetName, id, payload as Record<string, unknown>);
     return;
   }
