@@ -1,0 +1,425 @@
+{
+  "version": "1.0",
+  "appId": "41df5d3f-bdcd-4148-8ee6-74a88e76deb0",
+  "appDisplayName": "CFR Project Management",
+  "region": "prod",
+  "environmentId": "731e4975-10cd-4535-b82f-1ff016e59b6c",
+  "description": "Coram Finance RevCycle unified project management application.",
+  "buildPath": "./dist",
+  "buildEntryPoint": "index.html",
+  "localAppUrl": "http://localhost:3000",
+  "logoPath": "Default",
+  "connectionReferences": {
+    "68266732-9e3c-4de1-9050-ce600d739031": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_office365users",
+      "displayName": "Office 365 Users",
+      "dataSources": [
+        "office365users"
+      ],
+      "dataSets": {}
+    },
+    "186bddfd-8228-4576-87ea-a55ced697505": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+      "displayName": "SharePoint",
+      "dataSources": [
+        "appdocuments"
+      ],
+      "dataSets": {
+        "https://aetnao365.sharepoint.com/sites/Nexus-PMO": {
+          "dataSources": {
+            "appdocuments": {
+              "tableName": "b3d661d4-bdd0-406b-ad54-16fe6837cee6"
+            }
+          }
+        }
+      }
+    }
+  },
+  "databaseReferences": {
+    "default.cds": {
+      "dataSources": {
+        "projectrequests": {
+          "entitySetName": "pmo_projectrequests",
+          "logicalName": "pmo_projectrequest",
+          "isHidden": false
+        },
+        "projectteams": {
+          "entitySetName": "pmo_projectteams",
+          "logicalName": "pmo_projectteam",
+          "isHidden": false
+        },
+        "projects": {
+          "entitySetName": "msdyn_projects",
+          "logicalName": "msdyn_project",
+          "isHidden": false
+        },
+        "programs": {
+          "entitySetName": "msdyn_projectprograms",
+          "logicalName": "msdyn_projectprogram",
+          "isHidden": false
+        },
+        "statusreports": {
+          "entitySetName": "msdyn_projectstatusreports",
+          "logicalName": "msdyn_projectstatusreport",
+          "isHidden": false
+        },
+        "organizations": {
+          "entitySetName": "organizations",
+          "logicalName": "organization",
+          "isHidden": true
+        },
+        "systemusers": {
+          "entitySetName": "systemusers",
+          "logicalName": "systemuser",
+          "isHidden": true
+        },
+        "roles": {
+          "entitySetName": "roles",
+          "logicalName": "role",
+          "isHidden": true
+        },
+        "teams": {
+          "entitySetName": "teams",
+          "logicalName": "team",
+          "isHidden": true
+        },
+        "projecttasks": {
+          "entitySetName": "msdyn_projecttasks",
+          "logicalName": "msdyn_projecttask",
+          "isHidden": false
+        },
+        "projectbuckets": {
+          "entitySetName": "msdyn_projectbuckets",
+          "logicalName": "msdyn_projectbucket",
+          "isHidden": false
+        },
+        "projecttaskdependencies": {
+          "entitySetName": "msdyn_projecttaskdependencies",
+          "logicalName": "msdyn_projecttaskdependency",
+          "isHidden": false
+        },
+        "resourceassignments": {
+          "entitySetName": "msdyn_resourceassignments",
+          "logicalName": "msdyn_resourceassignment",
+          "isHidden": false
+        },
+        "bookableresources": {
+          "entitySetName": "bookableresources",
+          "logicalName": "bookableresource",
+          "isHidden": false
+        },
+        "projectteammembers": {
+          "entitySetName": "msdyn_projectteams",
+          "logicalName": "msdyn_projectteam",
+          "isHidden": false
+        },
+        "projectrisks": {
+          "entitySetName": "msdyn_projectrisks",
+          "logicalName": "msdyn_projectrisk",
+          "isHidden": false
+        },
+        "projectissues": {
+          "entitySetName": "msdyn_projectissues",
+          "logicalName": "msdyn_projectissue",
+          "isHidden": false
+        },
+        "projectchanges": {
+          "entitySetName": "msdyn_projectchanges",
+          "logicalName": "msdyn_projectchange",
+          "isHidden": false
+        },
+        "documentheaders": {
+          "entitySetName": "msdyn_documentheaders",
+          "logicalName": "msdyn_documentheader",
+          "isHidden": true
+        },
+        "projectlabels": {
+          "entitySetName": "msdyn_projectlabels",
+          "logicalName": "msdyn_projectlabel",
+          "isHidden": true
+        },
+        "projecttasktolabels": {
+          "entitySetName": "msdyn_projecttasktolabels",
+          "logicalName": "msdyn_projecttasktolabel",
+          "isHidden": true
+        },
+        "projectchecklists": {
+          "entitySetName": "msdyn_projectchecklists",
+          "logicalName": "msdyn_projectchecklist",
+          "isHidden": true
+        },
+        "projectsprints": {
+          "entitySetName": "msdyn_projectsprints",
+          "logicalName": "msdyn_projectsprint",
+          "isHidden": true
+        },
+        "relationshipdefinitions": {
+          "entitySetName": "RelationshipDefinitions",
+          "logicalName": "RelationshipDefinition",
+          "isHidden": true
+        },
+        "entitydefinitions": {
+          "entitySetName": "EntityDefinitions",
+          "logicalName": "EntityDefinition",
+          "isHidden": true
+        },
+        "systems": {
+          "entitySetName": "cr87a_systems",
+          "logicalName": "cr87a_system",
+          "isHidden": true
+        },
+        "payerdeckissues": {
+          "entitySetName": "rcm_payerdeckissues",
+          "logicalName": "rcm_payerdeckissue",
+          "isHidden": false
+        },
+        "payerissues": {
+          "entitySetName": "cr87a_payerissues",
+          "logicalName": "cr87a_payerissue",
+          "isHidden": false
+        },
+        "annotations": {
+          "entitySetName": "annotations",
+          "logicalName": "annotation",
+          "isHidden": true
+        },
+        "appsettings": {
+          "entitySetName": "pmo_appsettings",
+          "logicalName": "pmo_appsetting",
+          "isHidden": true
+        },
+        "projecttemplates": {
+          "entitySetName": "pmo_projecttemplates",
+          "logicalName": "pmo_projecttemplate",
+          "isHidden": false
+        },
+        "documentlinks": {
+          "entitySetName": "pmo_documentlinks",
+          "logicalName": "pmo_documentlink",
+          "isHidden": false
+        },
+        "projectgates": {
+          "entitySetName": "pmo_projectgates",
+          "logicalName": "pmo_projectgate",
+          "isHidden": false
+        },
+        "projectgatedecisions": {
+          "entitySetName": "pmo_projectgatedecisions",
+          "logicalName": "pmo_projectgatedecision",
+          "isHidden": false
+        },
+        "requiredartifacts": {
+          "entitySetName": "pmo_requiredartifacts",
+          "logicalName": "pmo_requiredartifact",
+          "isHidden": false
+        },
+        "projectartifactstatuses": {
+          "entitySetName": "pmo_projectartifactstatuses",
+          "logicalName": "pmo_projectartifactstatus",
+          "isHidden": false
+        },
+        "projectcloseouts": {
+          "entitySetName": "pmo_projectcloseouts",
+          "logicalName": "pmo_projectcloseout",
+          "isHidden": false
+        },
+        "notifications": {
+          "entitySetName": "pmo_notifications",
+          "logicalName": "pmo_notification",
+          "isHidden": false
+        },
+        "userviews": {
+          "entitySetName": "pmo_userviews",
+          "logicalName": "pmo_userview",
+          "isHidden": false
+        },
+        "tasktemplates": {
+          "entitySetName": "pmo_tasktemplates",
+          "logicalName": "pmo_tasktemplate",
+          "isHidden": false
+        },
+        "telemetryevents": {
+          "entitySetName": "pmo_telemetryevents",
+          "logicalName": "pmo_telemetryevent",
+          "isHidden": false
+        },
+        "projectdecisions": {
+          "entitySetName": "pmo_projectdecisions",
+          "logicalName": "pmo_projectdecision",
+          "isHidden": false
+        },
+        "projectmeetinglinks": {
+          "entitySetName": "pmo_projectmeetinglinks",
+          "logicalName": "pmo_projectmeetinglink",
+          "isHidden": false
+        },
+        "projectbaselines": {
+          "entitySetName": "pmo_projectbaselines",
+          "logicalName": "pmo_projectbaseline",
+          "isHidden": false
+        },
+        "gatesettemplates": {
+          "entitySetName": "pmo_gatesettemplates",
+          "logicalName": "pmo_gatesettemplate",
+          "isHidden": false
+        },
+        "gatesetitems": {
+          "entitySetName": "pmo_gatesetitems",
+          "logicalName": "pmo_gatesetitem",
+          "isHidden": false
+        },
+        "userfeedback": {
+          "entitySetName": "pmo_userfeedbacks",
+          "logicalName": "pmo_userfeedback",
+          "isHidden": false
+        },
+        "taskstagings": {
+          "entitySetName": "pmo_taskstagings",
+          "logicalName": "pmo_taskstaging",
+          "isHidden": true
+        },
+        "tasks": {
+          "entitySetName": "pmo_tasks",
+          "logicalName": "pmo_task",
+          "isHidden": false
+        },
+        "buckets": {
+          "entitySetName": "pmo_buckets",
+          "logicalName": "pmo_bucket",
+          "isHidden": false
+        },
+        "projects_custom": {
+          "entitySetName": "pmo_projects",
+          "logicalName": "pmo_project",
+          "isHidden": false
+        },
+        "programs_custom": {
+          "entitySetName": "pmo_programs",
+          "logicalName": "pmo_program",
+          "isHidden": false
+        },
+        "taskassignments": {
+          "entitySetName": "pmo_taskassignments",
+          "logicalName": "pmo_taskassignment",
+          "isHidden": false
+        },
+        "checklists": {
+          "entitySetName": "pmo_checklists",
+          "logicalName": "pmo_checklist",
+          "isHidden": false
+        },
+        "tasktolabels": {
+          "entitySetName": "pmo_tasktolabels",
+          "logicalName": "pmo_tasktolabel",
+          "isHidden": false
+        },
+        "projectrisks_custom": {
+          "entitySetName": "pmo_projectrisks",
+          "logicalName": "pmo_projectrisk",
+          "isHidden": false
+        },
+        "projectissues_custom": {
+          "entitySetName": "pmo_projectissues",
+          "logicalName": "pmo_projectissue",
+          "isHidden": false
+        },
+        "projectchanges_custom": {
+          "entitySetName": "pmo_projectchanges",
+          "logicalName": "pmo_projectchange",
+          "isHidden": false
+        },
+        "projectstatusreports_custom": {
+          "entitySetName": "pmo_projectstatusreports",
+          "logicalName": "pmo_projectstatusreport",
+          "isHidden": false
+        },
+        "uattemplates": {
+          "entitySetName": "pmo_uattemplates",
+          "logicalName": "pmo_uattemplate",
+          "isHidden": false
+        },
+        "uattemplatequestions": {
+          "entitySetName": "pmo_uattemplatequestions",
+          "logicalName": "pmo_uattemplatequestion",
+          "isHidden": false
+        },
+        "uatrequirements": {
+          "entitySetName": "pmo_uatrequirements",
+          "logicalName": "pmo_uatrequirement",
+          "isHidden": false
+        },
+        "uattestcases": {
+          "entitySetName": "pmo_uattestcases",
+          "logicalName": "pmo_uattestcase",
+          "isHidden": false
+        },
+        "uatcoveragelinks": {
+          "entitySetName": "pmo_uatcoveragelinks",
+          "logicalName": "pmo_uatcoveragelink",
+          "isHidden": false
+        },
+        "uattags": {
+          "entitySetName": "pmo_uattags",
+          "logicalName": "pmo_uattag",
+          "isHidden": false
+        },
+        "uattaglinks": {
+          "entitySetName": "pmo_uattaglinks",
+          "logicalName": "pmo_uattaglink",
+          "isHidden": false
+        },
+        "uatcycles": {
+          "entitySetName": "pmo_uatcycles",
+          "logicalName": "pmo_uatcycle",
+          "isHidden": false
+        },
+        "uattestruns": {
+          "entitySetName": "pmo_uattestruns",
+          "logicalName": "pmo_uattestrun",
+          "isHidden": false
+        },
+        "uattestrunanswers": {
+          "entitySetName": "pmo_uattestrunanswers",
+          "logicalName": "pmo_uattestrunanswer",
+          "isHidden": false
+        },
+        "uatdefects": {
+          "entitySetName": "pmo_uatdefects",
+          "logicalName": "pmo_uatdefect",
+          "isHidden": false
+        },
+        "uatattachments": {
+          "entitySetName": "pmo_uatattachments",
+          "logicalName": "pmo_uatattachment",
+          "isHidden": false
+        },
+        "uatprojectsettings": {
+          "entitySetName": "pmo_uatprojectsettings",
+          "logicalName": "pmo_uatprojectsetting",
+          "isHidden": false
+        },
+        "uatimportbatchs": {
+          "entitySetName": "pmo_uatimportbatchs",
+          "logicalName": "pmo_uatimportbatch",
+          "isHidden": false
+        },
+        "uatimportrows": {
+          "entitySetName": "pmo_uatimportrows",
+          "logicalName": "pmo_uatimportrow",
+          "isHidden": false
+        },
+        "trackings": {
+          "entitySetName": "pmo_trackings",
+          "logicalName": "pmo_tracking",
+          "isHidden": false
+        },
+        "costledgeritems": {
+          "entitySetName": "pmo_costledgeritems",
+          "logicalName": "pmo_costledgeritem",
+          "isHidden": false
+        }
+      },
+      "environmentVariableName": ""
+    }
+  }
+}
